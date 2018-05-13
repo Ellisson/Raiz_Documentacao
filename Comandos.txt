@@ -1,0 +1,1 @@
+sphinx-build -b html "D:\Google_Drive\2017.2\PFC II\Raiz_Documentacao\source" "D:\Google_Drive\2017.2\PFC II\Raiz_Documentacao\build"

@@ -1,0 +1,43 @@
+=============================================
+Chapter 12 Functions and Operators
+=============================================
+------------------------------------
+Table of contents
+------------------------------------
+`12.1 - Function and Operator Reference <Function_and_operador_12.1.html>`_
+
+`12.2 - Type Conversion in Expression Evaluation <Type_Conversion_in_Expression_Evaluation_12.2.html>`_
+
+`12.3 - Operators <Operator.html>`_
+
+Expressions can be used at several points in SQL statements, such as in the ORDER BY or HAVING clauses of SELECT statements, in the WHERE clause of a SELECT, DELETE, or UPDATE statement, or in SET statements. Expressions can be written using literal values, column values, NULL, built-in functions, stored functions, user-defined functions, and operators. This chapter describes the functions and operators that are permitted for writing expressions in MySQL. Instructions for writing stored functions and user-defined functions are given in Section 23.2, Using Stored Routines (Procedures and Functions), and Section 28.4, Adding New Functions to MySQL. See Section 9.2.4, Function Name Parsing and Resolution, for the rules describing how the server interprets references to different kinds of functions.
+
+An expression that contains NULL always produces a NULL value unless otherwise indicated in the documentation for a particular function or operator.
+
+.. Note :: By default, there must be no whitespace between a function name and the parenthesis following it. This helps the MySQL parser distinguish between function calls and references to tables or columns that happen to have the same name as a function. However, spaces around function arguments are permitted.
+
+
+You can tell the MySQL server to accept spaces after function names by starting it with the --sql-mode=IGNORE_SPACE option. (See Section 5.1.8, Server SQL Modes.) Individual client programs can request this behavior by using the CLIENT_IGNORE_SPACE option for mysql_real_connect(). In either case, all function names become reserved words.
+
+For the sake of brevity, most examples in this chapter display the output from the mysql program in abbreviated form. Rather than showing examples in this format:
+
+::
+
+        mysql> SELECT MOD(29,9);
+        +-----------+
+        | mod(29,9) |
+        +-----------+
+        |         2 |
+        +-----------+
+        1 rows in set (0.00 sec)
+   
+
+
+This format is used instead:
+
+::
+
+    mysql> SELECT MOD(29,9);
+        -> 2
+
+

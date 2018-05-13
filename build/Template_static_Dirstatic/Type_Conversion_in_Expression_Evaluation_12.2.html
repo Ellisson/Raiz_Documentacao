@@ -1,0 +1,166 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>12.2 Type Conversion in Expression Evaluation &#8212; Documentação Experimento 1</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Pesquisar" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="type-conversion-in-expression-evaluation">
+<h1>12.2 Type Conversion in Expression Evaluation<a class="headerlink" href="#type-conversion-in-expression-evaluation" title="Link permanente para este título">¶</a></h1>
+<p>When an operator is used with operands of different types, type conversion occurs to make the operands compatible. Some conversions occur implicitly. For example, MySQL automatically converts numbers to strings as necessary, and vice versa.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mf">1.</span> <span class="n">mysql</span><span class="o">&gt;</span> <span class="n">SELECT</span> <span class="mi">1</span><span class="o">+</span><span class="s1">&#39;1&#39;</span><span class="p">;</span>
+<span class="mf">2.</span>        <span class="o">-&gt;</span> <span class="mi">2</span>
+<span class="mf">3.</span> <span class="n">mysql</span><span class="o">&gt;</span> <span class="n">SELECT</span> <span class="n">CONCAT</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="s1">&#39; test&#39;</span><span class="p">);</span>
+<span class="mf">4.</span>        <span class="o">-&gt;</span> <span class="s1">&#39;2 test&#39;</span>
+</pre></div>
+</div>
+<p>It is also possible to convert a number to a string explicitly using the <span class="xref std std-ref">CAST()</span> function. Conversion occurs implicitly with the <span class="xref std std-ref">CONCAT()</span> function because it expects string arguments.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">mysql</span><span class="o">&gt;</span> <span class="n">SELECT</span> <span class="mf">38.8</span><span class="p">,</span> <span class="n">CAST</span><span class="p">(</span><span class="mf">38.8</span> <span class="n">AS</span> <span class="n">CHAR</span><span class="p">);</span>
+        <span class="o">-&gt;</span> <span class="mf">38.8</span><span class="p">,</span> <span class="s1">&#39;38.8&#39;</span>
+<span class="n">mysql</span><span class="o">&gt;</span> <span class="n">SELECT</span> <span class="mf">38.8</span><span class="p">,</span> <span class="n">CONCAT</span><span class="p">(</span><span class="mf">38.8</span><span class="p">);</span>
+        <span class="o">-&gt;</span> <span class="mf">38.8</span><span class="p">,</span> <span class="s1">&#39;38.8&#39;</span>
+</pre></div>
+</div>
+<p>See later in this section for information about the character set of implicit number-to-string conversions, and for modified rules that apply to CREATE TABLE … SELECT statements.</p>
+<p>The following rules describe how conversion occurs for comparison operations:</p>
+<p>If one or both arguments are NULL, the result of the comparison is NULL, except for the NULL-safe &lt;=&gt; equality comparison operator. For NULL &lt;=&gt; NULL, the result is true. No conversion is needed.</p>
+<p>If both arguments in a comparison operation are strings, they are compared as strings.</p>
+<p>If both arguments are integers, they are compared as integers.</p>
+<p>Hexadecimal values are treated as binary strings if not compared to a number.</p>
+<p>If one of the arguments is a TIMESTAMP or DATETIME column and the other argument is a constant, the constant is converted to a timestamp before the comparison is performed. This is done to be more ODBC-friendly. This is not done for the arguments to IN(). To be safe, always use complete datetime, date, or time strings when doing comparisons. For example, to achieve best results when using BETWEEN with date or time values, use CAST() to explicitly convert the values to the desired data type.</p>
+<p>A single-row subquery from a table or tables is not considered a constant. For example, if a subquery returns an integer to be compared to a DATETIME value, the comparison is done as two integers. The integer is not converted to a temporal value. To compare the operands as DATETIME values, use CAST() to explicitly convert the subquery value to DATETIME.</p>
+<p>If one of the arguments is a decimal value, comparison depends on the other argument. The arguments are compared as decimal values if the other argument is a decimal or integer value, or as floating-point values if the other argument is a floating-point value.</p>
+<p>In all other cases, the arguments are compared as floating-point (real) numbers.</p>
+<p>For information about conversion of values from one temporal type to another, see Section 11.3.7, “Conversion Between Date and Time Types”.</p>
+<p>Comparison of JSON values takes place at two levels. The first level of comparison is based on the JSON types of the compared values. If the types differ, the comparison result is determined solely by which type has higher precedence. If the two values have the same JSON type, a second level of comparison occurs using type-specific rules. For comparison of JSON and non-JSON values, the non-JSON value is converted to JSON and the values compared as JSON values. For details, see Comparison and Ordering of JSON Values.</p>
+<p>The following examples illustrate conversion of strings to numbers for comparison operations:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">mysql</span><span class="o">&gt;</span> <span class="n">SELECT</span> <span class="mi">1</span> <span class="o">&gt;</span> <span class="s1">&#39;6x&#39;</span><span class="p">;</span>
+    <span class="o">-&gt;</span> <span class="mi">0</span>
+<span class="n">mysql</span><span class="o">&gt;</span> <span class="n">SELECT</span> <span class="mi">7</span> <span class="o">&gt;</span> <span class="s1">&#39;6x&#39;</span><span class="p">;</span>
+    <span class="o">-&gt;</span> <span class="mi">1</span>
+<span class="n">mysql</span><span class="o">&gt;</span> <span class="n">SELECT</span> <span class="mi">0</span> <span class="o">&gt;</span> <span class="s1">&#39;x6&#39;</span><span class="p">;</span>
+    <span class="o">-&gt;</span> <span class="mi">0</span>
+<span class="n">mysql</span><span class="o">&gt;</span> <span class="n">SELECT</span> <span class="mi">0</span> <span class="o">=</span> <span class="s1">&#39;x6&#39;</span><span class="p">;</span>
+    <span class="o">-&gt;</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<p>For comparisons of a string column with a number, MySQL cannot use an index on the column to look up the value quickly. If str_col is an indexed string column, the index cannot be used when performing the lookup in the following statement:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">SELECT</span> <span class="o">*</span> <span class="n">FROM</span> <span class="n">tbl_name</span> <span class="n">WHERE</span> <span class="n">str_col</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>The reason for this is that there are many different strings that may convert to the value 1, such as “1”, “ 1”, or “1a”.</p>
+<p>Comparisons that use floating-point numbers (or values that are converted to floating-point numbers) are approximate because such numbers are inexact. This might lead to results that appear inconsistent:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">mysql</span><span class="o">&gt;</span> <span class="n">SELECT</span> <span class="s1">&#39;18015376320243458&#39;</span> <span class="o">=</span> <span class="mi">18015376320243458</span><span class="p">;</span>
+    <span class="o">-&gt;</span> <span class="mi">1</span>
+<span class="n">mysql</span><span class="o">&gt;</span> <span class="n">SELECT</span> <span class="s1">&#39;18015376320243459&#39;</span> <span class="o">=</span> <span class="mi">18015376320243459</span><span class="p">;</span>
+    <span class="o">-&gt;</span> <span class="mi">0</span>
+</pre></div>
+</div>
+<p>Such results can occur because the values are converted to floating-point numbers, which have only 53 bits of precision and are subject to rounding:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">mysql</span><span class="o">&gt;</span> <span class="n">SELECT</span> <span class="s1">&#39;18015376320243459&#39;</span><span class="o">+</span><span class="mf">0.0</span><span class="p">;</span>
+<span class="o">-&gt;</span> <span class="mf">1.8015376320243e+16</span>
+</pre></div>
+</div>
+<p>Furthermore, the conversion from string to floating-point and from integer to floating-point do not necessarily occur the same way. The integer may be converted to floating-point by the CPU, whereas the string is converted digit by digit in an operation that involves floating-point multiplications.</p>
+<p>The results shown will vary on different systems, and can be affected by factors such as computer architecture or the compiler version or optimization level. One way to avoid such problems is to use CAST() so that a value is not converted implicitly to a float-point number:</p>
+<dl class="docutils">
+<dt>mysql&gt; SELECT CAST(“18015376320243459” AS UNSIGNED) = 18015376320243459;</dt>
+<dd>-&gt; 1</dd>
+</dl>
+<p>For more information about floating-point comparisons, see Section B.5.4.8, “Problems with Floating-Point Values”.</p>
+<p>The server includes dtoa, a conversion library that provides the basis for improved conversion between string or DECIMAL values and approximate-value (FLOAT/DOUBLE) numbers:</p>
+<p>Consistent conversion results across platforms, which eliminates, for example, Unix versus Windows conversion differences.</p>
+<p>Accurate representation of values in cases where results previously did not provide sufficient precision, such as for values close to IEEE limits.</p>
+<p>Conversion of numbers to string format with the best possible precision. The precision of dtoa is always the same or better than that of the standard C library functions.</p>
+<p>Because the conversions produced by this library differ in some cases from non-dtoa results, the potential exists for incompatibilities in applications that rely on previous results. For example, applications that depend on a specific exact result from previous conversions might need adjustment to accommodate additional precision.</p>
+<p>The dtoa library provides conversions with the following properties. D represents a value with a DECIMAL or string representation, and F represents a floating-point number in native binary (IEEE) format.</p>
+<p>F -&gt; D conversion is done with the best possible precision, returning D as the shortest string that yields F when read back in and rounded to the nearest value in native binary format as specified by IEEE.</p>
+<p>D -&gt; F conversion is done such that F is the nearest native binary number to the input decimal string D.</p>
+<p>These properties imply that F -&gt; D -&gt; F conversions are lossless unless F is -inf, +inf, or NaN. The latter values are not supported because the SQL standard defines them as invalid values for FLOAT or DOUBLE.</p>
+<p>For D -&gt; F -&gt; D conversions, a sufficient condition for losslessness is that D uses 15 or fewer digits of precision, is not a denormal value, -inf, +inf, or NaN. In some cases, the conversion is lossless even if D has more than 15 digits of precision, but this is not always the case.</p>
+<p>Implicit conversion of a numeric or temporal value to string produces a value that has a character set and collation determined by the character_set_connection and collation_connection system variables. (These variables commonly are set with SET NAMES. For information about connection character sets, see Section 10.4, “Connection Character Sets and Collations”.)</p>
+<p>This means that such a conversion results in a character (nonbinary) string (a CHAR, VARCHAR, or LONGTEXT value), except in the case that the connection character set is set to binary. In that case, the conversion result is a binary string (a BINARY, VARBINARY, or LONGBLOB value).</p>
+<p>For integer expressions, the preceding remarks about expression evaluation apply somewhat differently for expression assignment; for example, in a statement such as this:</p>
+<p>CREATE TABLE t SELECT integer_expr;
+In this case, the table in the column resulting from the expression has type INT or BIGINT depending on the length of the integer expression. If the maximum length of the expression does not fit in an INT, BIGINT is used instead. The length is taken from the max_length value of the SELECT result set metadata (see Section 27.8.5, “C API Data Structures”). This means that you can force a BIGINT rather than INT by use of a sufficiently long expression:</p>
+<p>CREATE TABLE t SELECT 000000000000000000000;</p>
+<p><a class="reference external" href="Chapter_12_Functions_and_Operators.html">Return</a></p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../master_document.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Pesquisa rápida</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Ir" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Ellisson Campos.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.6</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="../_sources/Template_static_Dirstatic/Type_Conversion_in_Expression_Evaluation_12.2.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

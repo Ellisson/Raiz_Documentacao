@@ -1,0 +1,120 @@
+====================================
+12.3 Function and Operator Reference
+====================================
+------------------------------------
+Table 12.3 Functions and Operators
+------------------------------------
+.. list-table::
+   :widths: 170 600
+   :header-rows: 1
+
+   * - Name
+     - Description
+   * - ABS()
+     - Return the absolute value
+   * - ACOS()
+     - Return the arc cosine  
+   * - ADDDATE() 
+     - Add time values (intervals) to a date value
+   * - ADDTIME()	
+     - Add time values
+   * - AES_DECRYPT()	
+     - Decrypt using AES
+   * - AES_ENCRYPT()	
+     - Encrypt using AES AND, &&	Logical 
+   * - AND ANY_VALUE()	
+     - Suppress ONLY_FULL_GROUP_BY value rejection
+   * - Area() (deprecated 5.7.6)	
+     - Return Polygon or MultiPolygon area
+   * - AsBinary(), AsWKB() (deprecated 5.7.6)
+     - Convert from internal geometry format to WKB
+   * - ASCII()	
+     - Return numeric value of left-most character
+   * - ASIN()	
+     - Return the arc sine Assign a value (as part of a SET statement,
+ 	   or as part of the SET clause in an UPDATE statement)Assign a value 
+	   AsText(), AsWKT() (deprecated 5.7.6)	
+	   Convert from internal geometry format to WKT
+   * - ASYMMETRIC_DECRYPT()	
+     - Decrypt ciphertext using private or public key
+   * - ASYMMETRIC_DERIVE()	
+     - Derive symmetric key from asymmetric keys
+   * - ASYMMETRIC_ENCRYPT()	
+     - Encrypt cleartext using private or public key
+   * - ASYMMETRIC_SIGN()	
+     - Generate signature from digest
+   * - ASYMMETRIC_VERIFY()	
+     - Verify that signature matches digest
+   * - ATAN()	
+     - Return the arc tangent
+   * - ATAN2(), ATAN()	
+     - Return the arc tangent of the two arguments
+   * - AVG()
+     - Return the average value of the argument
+   * - BENCHMARK()
+     - Repeatedly execute an expression
+   * - BETWEEN ... AND ...	
+     - Check whether a value is within a range of values
+   * - BIN()	
+     - Return a string containing binary representation of a number
+   * - BINARY	
+     - Cast a string to a binary string
+   * - BIT_AND()	
+     - Return bitwise AND
+   * - BIT_COUNT()	
+     - Return the number of bits that are set
+   * - BIT_LENGTH()	
+     - Return length of argument in bits
+   * - BIT_OR()	
+     - Return bitwise OR
+   * - BIT_XOR()
+     - Return bitwise XOR &	Bitwise AND~	Bitwise inversion|	Bitwise OR^	Bitwise XOR   
+   * - Buffer() 
+     - (deprecated 5.7.6)	Return geometry of points within given distance from geometry
+   * - CASE	
+     - Case operator
+   * - CAST()	
+     - Cast a value as a certain type
+   * - CEIL()	
+     - Return the smallest integer value not less than the argument 
+   * - CEILING()	
+     - Return the smallest integer value not less than the argument
+   * - Centroid() (deprecated 5.7.6)
+     - Return centroid as a point
+   * - CHAR()	
+     - Return the character for each integer passed
+   * - CHAR_LENGTH()	
+     - Return number of characters in argument
+   * - CHARACTER_LENGTH()	
+     - Synonym for CHAR_LENGTH()
+   * - CHARSET()	
+     - Return the character set of the argument
+   * - COALESCE()	
+     - Return the first non-NULL argument
+   * - COERCIBILITY()	
+     - Return the collation coercibility value of the string argument
+   * - COLLATION()	
+     - Return the collation of the string argument
+   * - COMPRESS()	
+     - Return result as a binary string
+   * - CONCAT()	
+     - Return concatenated string
+   * - CONCAT_WS()	
+     - Return concatenate with separator
+   * - CONNECTION_ID()	
+     - Return the connection ID (thread ID) for the connection
+   * - Contains() (deprecated 5.7.6)	
+     - Whether MBR of one geometry contains MBR of another
+   * - CONV()	
+     - Convert numbers between different number bases
+   * - CONVERT()	
+     - Cast a value as a certain type
+   * - CONVERT_TZ()	
+     - Convert from one time zone to another
+   * - ConvexHull() 
+     - (deprecated 5.7.6)	Return convex hull of geometry
+   * - ...  
+     - ...
+
+
+`Return <Chapter_12_Functions_and_Operators.html>`_

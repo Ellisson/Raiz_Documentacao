@@ -1,0 +1,263 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>12.1 Function and Operator Reference &#8212; Documentação Experimento 1</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Pesquisar" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="function-and-operator-reference">
+<h1>12.1 Function and Operator Reference<a class="headerlink" href="#function-and-operator-reference" title="Link permanente para este título">¶</a></h1>
+<div class="section" id="table-12-1-functions-and-operators">
+<h2>Table 12.1 Functions and Operators<a class="headerlink" href="#table-12-1-functions-and-operators" title="Link permanente para este título">¶</a></h2>
+<table border="1" class="colwidths-given docutils">
+<colgroup>
+<col width="22%" />
+<col width="78%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>ABS()</td>
+<td>Return the absolute value</td>
+</tr>
+<tr class="row-odd"><td>ACOS()</td>
+<td>Return the arc cosine</td>
+</tr>
+<tr class="row-even"><td>ADDDATE()</td>
+<td>Add time values (intervals) to a date value</td>
+</tr>
+<tr class="row-odd"><td>ADDTIME()</td>
+<td>Add time values</td>
+</tr>
+<tr class="row-even"><td>AES_DECRYPT()</td>
+<td>Decrypt using AES</td>
+</tr>
+<tr class="row-odd"><td>AES_ENCRYPT()</td>
+<td>Encrypt using AES AND, &amp;&amp;        Logical</td>
+</tr>
+<tr class="row-even"><td>AND ANY_VALUE()</td>
+<td>Suppress ONLY_FULL_GROUP_BY value rejection</td>
+</tr>
+<tr class="row-odd"><td>Area() (deprecated 5.7.6)</td>
+<td>Return Polygon or MultiPolygon area</td>
+</tr>
+<tr class="row-even"><td>AsBinary(), AsWKB() (deprecated 5.7.6)</td>
+<td>Convert from internal geometry format to WKB</td>
+</tr>
+<tr class="row-odd"><td>ASCII()</td>
+<td>Return numeric value of left-most character</td>
+</tr>
+<tr class="row-even"><td>ASIN()</td>
+<td><dl class="first last docutils">
+<dt>Return the arc sine Assign a value (as part of a SET statement,</dt>
+<dd>or as part of the SET clause in an UPDATE statement)Assign a value
+AsText(), AsWKT() (deprecated 5.7.6)
+Convert from internal geometry format to WKT</dd>
+</dl>
+</td>
+</tr>
+<tr class="row-odd"><td>ASYMMETRIC_DECRYPT()</td>
+<td>Decrypt ciphertext using private or public key</td>
+</tr>
+<tr class="row-even"><td>ASYMMETRIC_DERIVE()</td>
+<td>Derive symmetric key from asymmetric keys</td>
+</tr>
+<tr class="row-odd"><td>ASYMMETRIC_ENCRYPT()</td>
+<td>Encrypt cleartext using private or public key</td>
+</tr>
+<tr class="row-even"><td>ASYMMETRIC_SIGN()</td>
+<td>Generate signature from digest</td>
+</tr>
+<tr class="row-odd"><td>ASYMMETRIC_VERIFY()</td>
+<td>Verify that signature matches digest</td>
+</tr>
+<tr class="row-even"><td>ATAN()</td>
+<td>Return the arc tangent</td>
+</tr>
+<tr class="row-odd"><td>ATAN2(), ATAN()</td>
+<td>Return the arc tangent of the two arguments</td>
+</tr>
+<tr class="row-even"><td>AVG()</td>
+<td>Return the average value of the argument</td>
+</tr>
+<tr class="row-odd"><td>BENCHMARK()</td>
+<td>Repeatedly execute an expression</td>
+</tr>
+<tr class="row-even"><td>BETWEEN … AND …</td>
+<td>Check whether a value is within a range of values</td>
+</tr>
+<tr class="row-odd"><td>BIN()</td>
+<td>Return a string containing binary representation of a number</td>
+</tr>
+<tr class="row-even"><td>BINARY</td>
+<td>Cast a string to a binary string</td>
+</tr>
+<tr class="row-odd"><td>BIT_AND()</td>
+<td>Return bitwise AND</td>
+</tr>
+<tr class="row-even"><td>BIT_COUNT()</td>
+<td>Return the number of bits that are set</td>
+</tr>
+<tr class="row-odd"><td>BIT_LENGTH()</td>
+<td>Return length of argument in bits</td>
+</tr>
+<tr class="row-even"><td>BIT_OR()</td>
+<td>Return bitwise OR</td>
+</tr>
+<tr class="row-odd"><td>BIT_XOR()</td>
+<td>Return bitwise XOR &amp;     Bitwise AND~    Bitwise inversion|      Bitwise OR^     Bitwise XOR</td>
+</tr>
+<tr class="row-even"><td>Buffer()</td>
+<td>(deprecated 5.7.6)       Return geometry of points within given distance from geometry</td>
+</tr>
+<tr class="row-odd"><td>CASE</td>
+<td>Case operator</td>
+</tr>
+<tr class="row-even"><td>CAST()</td>
+<td>Cast a value as a certain type</td>
+</tr>
+<tr class="row-odd"><td>CEIL()</td>
+<td>Return the smallest integer value not less than the argument</td>
+</tr>
+<tr class="row-even"><td>CEILING()</td>
+<td>Return the smallest integer value not less than the argument</td>
+</tr>
+<tr class="row-odd"><td>Centroid() (deprecated 5.7.6)</td>
+<td>Return centroid as a point</td>
+</tr>
+<tr class="row-even"><td>CHAR()</td>
+<td>Return the character for each integer passed</td>
+</tr>
+<tr class="row-odd"><td>CHAR_LENGTH()</td>
+<td>Return number of characters in argument</td>
+</tr>
+<tr class="row-even"><td>CHARACTER_LENGTH()</td>
+<td>Synonym for CHAR_LENGTH()</td>
+</tr>
+<tr class="row-odd"><td>CHARSET()</td>
+<td>Return the character set of the argument</td>
+</tr>
+<tr class="row-even"><td>COALESCE()</td>
+<td>Return the first non-NULL argument</td>
+</tr>
+<tr class="row-odd"><td>COERCIBILITY()</td>
+<td>Return the collation coercibility value of the string argument</td>
+</tr>
+<tr class="row-even"><td>COLLATION()</td>
+<td>Return the collation of the string argument</td>
+</tr>
+<tr class="row-odd"><td>COMPRESS()</td>
+<td>Return result as a binary string</td>
+</tr>
+<tr class="row-even"><td>CONCAT()</td>
+<td>Return concatenated string</td>
+</tr>
+<tr class="row-odd"><td>CONCAT_WS()</td>
+<td>Return concatenate with separator</td>
+</tr>
+<tr class="row-even"><td>CONNECTION_ID()</td>
+<td>Return the connection ID (thread ID) for the connection</td>
+</tr>
+<tr class="row-odd"><td>Contains() (deprecated 5.7.6)</td>
+<td>Whether MBR of one geometry contains MBR of another</td>
+</tr>
+<tr class="row-even"><td>CONV()</td>
+<td>Convert numbers between different number bases</td>
+</tr>
+<tr class="row-odd"><td>CONVERT()</td>
+<td>Cast a value as a certain type</td>
+</tr>
+<tr class="row-even"><td>CONVERT_TZ()</td>
+<td>Convert from one time zone to another</td>
+</tr>
+<tr class="row-odd"><td>ConvexHull()</td>
+<td>(deprecated 5.7.6)       Return convex hull of geometry</td>
+</tr>
+<tr class="row-even"><td>…</td>
+<td>…</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../master_document.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Pesquisa rápida</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Ir" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Ellisson Campos.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.6</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="../_sources/Template_static_Dirstatic/Operator.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
